@@ -4,6 +4,8 @@ The purpose of this repository is to supplement the video with code, and to prov
 
 The “A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9” video demonstrates storing three different data types into the standard NSUserDefaults.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XD9LWJthqNE" frameborder="0" allowfullscreen></iframe>
+
 The video uses Swift 2.0 and iOS 9
 
 You can find more iOS videos on [the DeegeU channel](http://www.deegeu.com/subscribe)
