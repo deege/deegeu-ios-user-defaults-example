@@ -26,7 +26,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //let appDomain = NSBundle.mainBundle().bundleIdentifier!
         //NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         // update labels from NSUserDefaults
@@ -37,74 +37,74 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Launches a UIImagePickerController so the user can select an image from the photo
     // albumn. This doesn't check to see if the application has access, so if things aren't working
     // go into settings and make sure the app has access to photos.
-    @IBAction func saveProfilePic(sender: UIButton) {
+    @IBAction func saveProfilePic(_ sender: UIButton) {
         print("Save Profile")
         let imagePicker = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum){
             imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
             imagePicker.allowsEditing = false
             
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+            self.present(imagePicker, animated: true, completion: nil)
         } else {
             print("Can't get to the photos")
         }
     }
 
     // Save the user's favorite beer to the NSUserDefaults
-    @IBAction func saveBeer(sender: UIButton) {
+    @IBAction func saveBeer(_ sender: UIButton) {
         if (favoriteBeerEdit.text!.characters.count > 0) {
-            let prefs = NSUserDefaults.standardUserDefaults()
-            prefs.setObject(favoriteBeerEdit.text, forKey: ViewController.favoriteBeer)
+            let prefs = UserDefaults.standard
+            prefs.set(favoriteBeerEdit.text, forKey: ViewController.favoriteBeer)
             saveTimestamp()
         }
         dismissKeyboard()
     }
     
     // Save the selected image to NSUserDefaults
-    func saveSelectedImage(image : UIImage) {
+    func saveSelectedImage(_ image : UIImage) {
         profileImage.image = image
         
         // Save image to NSUserDefaults
-        let prefs = NSUserDefaults.standardUserDefaults()
+        let prefs = UserDefaults.standard
         let imageData = UIImageJPEGRepresentation(image, 100)
-        prefs.setObject(imageData, forKey: ViewController.profileImage)
+        prefs.set(imageData, forKey: ViewController.profileImage)
         saveTimestamp()
 
     }
     
     // Saves the timestamp of when the user has made a change to the NSUserDefaults
     func saveTimestamp() {
-        let prefs = NSUserDefaults.standardUserDefaults()
-        let timestamp = NSDate()
-        prefs.setObject(timestamp, forKey: ViewController.lastUpdate)
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
-        dateFormatter.timeStyle = .MediumStyle
-        lastUpdateText.text = "Last Update:" + dateFormatter.stringFromDate(timestamp)
+        let prefs = UserDefaults.standard
+        let timestamp = Date()
+        prefs.set(timestamp, forKey: ViewController.lastUpdate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeStyle = .medium
+        lastUpdateText.text = "Last Update:" + dateFormatter.string(from: timestamp)
     }
     
     // Updates the view with the user values already stored in NSUserDefaults
     func getUserPreferences() {
-        let prefs = NSUserDefaults.standardUserDefaults()
+        let prefs = UserDefaults.standard
         
         // Get Favorite beer
-        if let beer = prefs.stringForKey(ViewController.favoriteBeer) {
+        if let beer = prefs.string(forKey: ViewController.favoriteBeer) {
             favoriteBeerEdit.text = beer
         }
         
         // Get profile image
-        if let imageData = prefs.objectForKey(ViewController.profileImage) as? NSData {
+        if let imageData = prefs.object(forKey: ViewController.profileImage) as? Data {
             let storedImage = UIImage.init(data: imageData)
             profileImage.image = storedImage
         }
         
         // Get the last time something was stored
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
-        dateFormatter.timeStyle = .MediumStyle
-        if let lastUpdateStored = (prefs.objectForKey(ViewController.lastUpdate) as? NSDate) {
-            lastUpdateText.text = "Last Update:" + dateFormatter.stringFromDate(lastUpdateStored)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeStyle = .medium
+        if let lastUpdateStored = (prefs.object(forKey: ViewController.lastUpdate) as? Date) {
+            lastUpdateText.text = "Last Update:" + dateFormatter.string(from: lastUpdateStored)
         } else {
             lastUpdateText.text = "Last Update: Never"
         }
@@ -112,9 +112,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
 // MARK: - UIImagePickerControllerDelegate methods
     // Responder for when the user selects an image. If they hit cancel, this isn't called.
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
-        self.dismissViewControllerAnimated(true, completion: nil)
-        saveSelectedImage(image)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            saveSelectedImage(image)
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            saveSelectedImage(image)
+        } else{
+            print("Bad things happened")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
 // MARK: - Keyboard responders so the keyboard goes away when we're done editing.
@@ -124,7 +132,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.endEditing(true)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

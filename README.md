@@ -4,9 +4,16 @@ The purpose of this repository is to supplement the video with code, and to prov
 
 The “A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9” video demonstrates storing three different data types into the standard NSUserDefaults.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XD9LWJthqNE" frameborder="0" allowfullscreen></iframe>
+[![A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9](https://img.youtube.com/vi/XD9LWJthqNE/0.jpg)](https://youtu.be/XD9LWJthqNE)
 
-The video uses Swift 2.0 and iOS 9
+The video uses Swift 3.1 and iOS 10.3 (updated 04-03-2017)
+
+This code has been updated since the making of the video. The code now requires two keys be set in the plist.info file:
+    * NSPhotoLibraryUsageDescription
+    * NSCameraUsageDescription
+These can be set to any value.
+
+Code in the function imagePickerController has also changed to find selected images from the editingInfo dictionary.
 
 You can find more iOS videos on [the DeegeU channel](http://www.deegeu.com/subscribe)
 
@@ -14,7 +21,14 @@ You can find more iOS videos on [the DeegeU channel](http://www.deegeu.com/subsc
 
 The code is a self contained Swift project that can be loaded into XCode.
 
-This code is written and compiled for Swift 2.0.
+This code is written and compiled for Swift 3.1.
+
+## Known issues
+There are two issues when running the application.
+1. objc[2962]: Class PLBuildVersion is implemented in both...
+   This appears to be an issue on Apple's side. Neither library is controlled by this application. This only occurs in the emulator.
+2. [Generic] Creating an image format with an unknown type is an error
+   Unknown cause, but does not appear to affect the application functionality.
 
 ## Getting help
 
