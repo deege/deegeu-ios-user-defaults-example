@@ -95,7 +95,6 @@
 				TargetAttributes = {
 					99C653791BA8A77B00D6C341 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = W2LK2X63U8;
 						LastSwiftMigration = 0830;
 					};
 				};
@@ -256,7 +255,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = W2LK2X63U8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "ios-user-defaults-example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deegeu.ios-user-defaults-example";
@@ -270,7 +269,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = W2LK2X63U8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "ios-user-defaults-example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deegeu.ios-user-defaults-example";
