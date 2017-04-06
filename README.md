@@ -6,9 +6,10 @@ The “A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9” video demons
 
 [![A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9](https://img.youtube.com/vi/XD9LWJthqNE/0.jpg)](https://youtu.be/XD9LWJthqNE)
 
-**The video uses Swift 3.1 and iOS 10.3 (updated 04-03-2017)**
+The video uses Swift 2.0 and iOS 9
+**The code uses Swift 3.1 and iOS 10.3**
 
-This code has been updated since the making of the video. The code now requires two keys be set in the plist.info file:
+This code has been updated since the making of the video (updated 04-03-2017). The code now requires two keys be set in the plist.info file:
     * NSPhotoLibraryUsageDescription
     * NSCameraUsageDescription
 These can be set to any value.
