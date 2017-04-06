@@ -1,4 +1,4 @@
-# A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9
+# A Foolproof NSUserDefaults example in Swift 3.1 for iOS 10.3
 
 The purpose of this repository is to supplement the video with code, and to provide a simple starting point to ad NSUserDefaults to your app.
 
@@ -6,7 +6,7 @@ The “A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9” video demons
 
 [![A Foolproof NSUserDefaults example in Swift 2.0 for iOS 9](https://img.youtube.com/vi/XD9LWJthqNE/0.jpg)](https://youtu.be/XD9LWJthqNE)
 
-The video uses Swift 3.1 and iOS 10.3 (updated 04-03-2017)
+**The video uses Swift 3.1 and iOS 10.3 (updated 04-03-2017)**
 
 This code has been updated since the making of the video. The code now requires two keys be set in the plist.info file:
     * NSPhotoLibraryUsageDescription
